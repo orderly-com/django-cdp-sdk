@@ -21,7 +21,7 @@ def get_tracker():
     except:
         team_code = ''
 
-    return Tracker(team_code, relay_url, cerem_url)
+    return Tracker(team_code, '1', relay_url, cerem_url)
 
 @api_view(['GET', 'POST'])
 def record_view_event(request, format=None, *args, **kwargs):
