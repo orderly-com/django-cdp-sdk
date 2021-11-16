@@ -24,13 +24,13 @@ def get_tracker():
     return Tracker(team_code, relay_url, cerem_url)
 
 @api_view(['GET', 'POST'])
-def record_view_event(request, version, format=None, *args, **kwargs):
+def record_view_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data, True)
     tracker = Tracker()
     tracker.view_event(**data)
 
 @api_view(['GET', 'POST'])
-def record_click_event(request, version, format=None, *args, **kwargs):
+def record_click_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data, True)
     tracker = Tracker()
     tracker.click_event(**data)
