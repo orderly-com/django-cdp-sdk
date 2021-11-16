@@ -2,6 +2,7 @@ from typing import Optional
 
 from rest_framework.decorators import api_view
 from django.http.request import QueryDict
+from django.http import JsonResponse
 from orderly_tracking.tracking import Tracker
 from django.conf import settings
 
@@ -28,12 +29,14 @@ def record_view_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data)
     tracker = get_tracker()
     tracker.view_event(**data)
+    JsonResponse({'status': True, 'data': []})
 
 @api_view(['GET', 'POST'])
 def record_click_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data)
     tracker = get_tracker()
     tracker.click_event(**data)
+    JsonResponse({'status': True, 'data': []})
 
 def querydict_to_dict(data):
 
