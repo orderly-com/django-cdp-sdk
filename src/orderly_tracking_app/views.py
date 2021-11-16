@@ -25,13 +25,13 @@ def get_tracker():
 
 @api_view(['GET', 'POST'])
 def record_view_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data, True)
+    data = querydict_to_dict(request.data)
     tracker = Tracker()
     tracker.view_event(**data)
 
 @api_view(['GET', 'POST'])
 def record_click_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data, True)
+    data = querydict_to_dict(request.data)
     tracker = Tracker()
     tracker.click_event(**data)
 
