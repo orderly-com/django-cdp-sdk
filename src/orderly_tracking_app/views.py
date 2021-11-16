@@ -29,14 +29,14 @@ def record_view_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data)
     tracker = get_tracker()
     tracker.view_event(**data)
-    JsonResponse({'status': True, 'data': []})
+    return JsonResponse({'status': True, 'data': []})
 
 @api_view(['GET', 'POST'])
 def record_click_event(request, format=None, *args, **kwargs):
     data = querydict_to_dict(request.data)
     tracker = get_tracker()
     tracker.click_event(**data)
-    JsonResponse({'status': True, 'data': []})
+    return JsonResponse({'status': True, 'data': []})
 
 def querydict_to_dict(data):
 
