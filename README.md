@@ -1,1 +1,1 @@
-# django-tracking-sdk
+# django-cdp-sdk
