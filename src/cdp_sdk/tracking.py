@@ -30,7 +30,7 @@ class Tracker:
         self.relay_url = relay_url
         self.cerem_url = cerem_url
 
-    def click_event(self, v: str, pt: str, tl: str, tg: str,
+    def click_event(self, v: str='', pt: str='', tl: str='', tg: str='',
                     ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                     sd: str = '', sr: str = '', did: str = '', vp: str = ''
                     ):
@@ -42,7 +42,7 @@ class Tracker:
             action='click',
         )
 
-    def view_event(self, v: str, pt: str, tl: str,
+    def view_event(self, v: str='', pt: str='', tl: str='',
                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                    sd: str = '', sr: str = '', did: str = '', vp: str = ''
                    ):
@@ -54,10 +54,10 @@ class Tracker:
             action='view',
         )
 
-    def _record_event(self, v: str, url: str, tl: str, tg: str,
+    def _record_event(self, v: str='', url: str='', tl: str='', tg: str='',
                       ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                       sd: str = '', sr: str = '', did: str = '', vp: str = '',
-                      action: str):
+                      action: str=''):
 
         if cid is None:
             try:
