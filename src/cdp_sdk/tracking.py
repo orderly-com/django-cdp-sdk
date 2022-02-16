@@ -33,7 +33,7 @@ class Tracker:
 
     def click_event(self, v: str = '', pt: str = '', tl: str = '',
                     ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
-                    sd: str = '', sr: str = '', did: str = '', vp: str = '',
+                    sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
                     tg: str = '',
                     ):
 
@@ -46,7 +46,7 @@ class Tracker:
 
     def view_event(self, v: str = '', pt: str = '', tl: str = '',
                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
-                   sd: str = '', sr: str = '', did: str = '', vp: str = '',
+                   sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
                    tg: str = '',
                    ):
 
