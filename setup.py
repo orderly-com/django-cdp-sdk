@@ -2,11 +2,11 @@ import os
 from setuptools import setup, find_packages
 
 setup(
-    name='django-tracking-sdk',
+    name='django-cdp-sdk',
     version='1.0.0',
-    url='https://github.com/orderly-com/django-tracking-sdk',
+    url='https://github.com/orderly-com/django-cdp-sdk',
     license='BSD',
-    description='A sdk for django to store tracking data in orderly cdp.',
+    description='CDP SDK for django.',
     author='RayYang',
     author_email='ray.yang@ezorderly.com',
 
