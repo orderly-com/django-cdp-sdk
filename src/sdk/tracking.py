@@ -1,6 +1,27 @@
 import requests
 from typing import Optional
 
+'''
+v: String,      // apiVersion           e.g: v1
+
+tc:String,      // team code            e.g: 137fb5dbcff742fda8893d8db1ca3d0d
+did: String,    // datasource id        e.g: 11
+
+uid: String,    // member id            e.g: 1
+cid: String,    // cdp user id          e.g: 11111111.1111111
+
+at: String,     // action               e.g: view, click, watch...
+tg: String,     // target               e.g  btn01, link03,....
+
+pt: String,     // path                 e.g: https://ezorderly.com/
+tl: String,     // title                e.g: ORDERLY CRM - 系統化管理會員行銷活動
+
+de: String,     // encoding             e.g: UTF-8
+ul: String,     // language             e.g: zh-tw
+sd: String,     // screenColors         e.g: 24-bit
+sr: String,     // screenResolution     e.g: 1920x1080
+vp: String,     // viewportSize         e.g: 1905x887
+'''
 
 class Tracker:
     def __init__(self, team_code, ds_id, relay_url, cerem_url) -> None:
@@ -9,29 +30,34 @@ class Tracker:
         self.relay_url = relay_url
         self.cerem_url = cerem_url
 
-    def click_event(self, version: str, url: str, title: str, target: str,
-                    language: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, decode_format: str = '',
-                    sd: str = '', sr: str = '', did: str = '', view_port_size: str = ''
+    def click_event(self, v: str, pt: str, tl: str, tg: str,
+                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
+                    sd: str = '', sr: str = '', did: str = '', vp: str = ''
                     ):
+
         result, cid = self._record_event(
-            version=version, action='click', url=url, title=title, target=target,
-            language=language, uid=uid, cid=cid, decode_format=decode_format, sd=sd,
-            sr=sr, did=did, view_port_size=view_port_size
+            v=v, pt=pt, tl=tl, tg=tg,
+            ul=ul, uid=uid, cid=cid, de=de, sd=sd,
+            sr=sr, did=did, vp=vp,
+            action='click',
         )
 
-    def view_event(self, version: str, url: str, title: str, target: str,
-                   language: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, decode_format: str = '',
-                   sd: str = '', sr: str = '', did: str = '', view_port_size: str = ''
+    def view_event(self, v: str, pt: str, tl: str,
+                   ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
+                   sd: str = '', sr: str = '', did: str = '', vp: str = ''
                    ):
+
         result, cid = self._record_event(
-            version=version, action='view', url=url, title=title, target=target,
-            language=language, uid=uid, cid=cid, decode_format=decode_format, sd=sd,
-            sr=sr, did=did, view_port_size=view_port_size
+            v=v, pt=pt, tl=tl, tg='',
+            ul=ul, uid=uid, cid=cid, de=de, sd=sd,
+            sr=sr, did=did, vp=vp,
+            action='view',
         )
 
-    def _record_event(self, version: str, action: str, url: str, title: str, target: str,
-                      language: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, decode_format: str = '',
-                      sd: str = '', sr: str = '', did: str = '', view_port_size: str = ''):
+    def _record_event(self, v: str, url: str, tl: str, tg: str,
+                      ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
+                      sd: str = '', sr: str = '', did: str = '', vp: str = '',
+                      action: str):
 
         if cid is None:
             try:
@@ -43,18 +69,18 @@ class Tracker:
         payload = {
             'tc': self.team_code,
             'did': did,
-            'v': version,
+            'v': v,
             'uid': uid,
             'cid': cid,
-            'tg': target,
-            'de': decode_format,
+            'tg': tg,
+            'de': de,
             'at': action,
-            'ul': language,
-            'pt': url,
+            'ul': ul,
+            'pt': pt,
             'sd': sd,
             'sr': sr,
-            'tl': title,
-            'vp': view_port_size
+            'tl': tl,
+            'vp': vp
         }
 
         requests.get(self.relay_url + '/api/' + self.ds_id + '/tracking/', params=payload)
