@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-cdp-sdk',
-    version='1.0.1',
+    version='1.0.2',
     url='https://github.com/orderly-com/django-cdp-sdk',
     license='BSD',
     description='CDP SDK for django.',
