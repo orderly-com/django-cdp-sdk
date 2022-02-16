@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from orderly_tracking.tracking import Tracker
 from django.conf import settings
 
+
 def get_tracker():
     try:
         cerem_url = settings.CEREM_API_URL
@@ -18,25 +19,17 @@ def get_tracker():
         relay_url = 'localhost'
 
     try:
-        team_code = settings.ORDERLY_TEAM_CODE
+        team_code = settings.CDP_TEAM_CODE
     except:
         team_code = ''
 
-    return Tracker(team_code, '1', relay_url, cerem_url)
+    try:
+        ds_id = settings.CDP_DS_ID
+    except:
+        ds_id = ''
 
-@api_view(['GET', 'POST'])
-def record_view_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data)
-    tracker = get_tracker()
-    tracker.view_event(**data)
-    return JsonResponse({'status': True, 'data': []})
+    return Tracker(team_code, ds_id, relay_url, cerem_url)
 
-@api_view(['GET', 'POST'])
-def record_click_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data)
-    tracker = get_tracker()
-    tracker.click_event(**data)
-    return JsonResponse({'status': True, 'data': []})
 
 def querydict_to_dict(data):
 
@@ -70,3 +63,21 @@ def querydict_to_dict(data):
                 key_values[key] = values
 
     return key_values
+
+
+@api_view(['GET', 'POST'])
+def record_view_event(request, format=None, *args, **kwargs):
+    data = querydict_to_dict(request.data)
+    tracker = get_tracker()
+    result, cid = tracker.view_event(**data)
+
+    return JsonResponse({'result': result, 'cid': cid})
+
+
+@api_view(['GET', 'POST'])
+def record_click_event(request, format=None, *args, **kwargs):
+    data = querydict_to_dict(request.data)
+    tracker = get_tracker()
+    result, cid = tracker.click_event(**data)
+
+    return JsonResponse({'result': result, 'cid': cid})
