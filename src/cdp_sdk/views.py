@@ -78,6 +78,18 @@ def record_view_event(request, format=None, *args, **kwargs):
         data = querydict_to_dict(request.data)
 
     tracker = get_tracker()
+
+    if tracker.team_code == '':
+        return JsonResponse({'result': False, 'cid': ''})
+
+    if 'tc' not in data:
+        return JsonResponse({'result': False, 'cid': ''})
+
+    if tracker.team_code != data['tc']:
+        return JsonResponse({'result': False, 'cid': ''})
+
+    del data['tc']
+
     result, cid = tracker.view_event(**data)
 
     return JsonResponse({'result': result, 'cid': cid})
@@ -95,6 +107,18 @@ def record_click_event(request, format=None, *args, **kwargs):
         data = querydict_to_dict(request.data)
 
     tracker = get_tracker()
+
+    if tracker.team_code == '':
+        return JsonResponse({'result': False, 'cid': ''})
+
+    if 'tc' not in data:
+        return JsonResponse({'result': False, 'cid': ''})
+
+    if tracker.team_code != data['tc']:
+        return JsonResponse({'result': False, 'cid': ''})
+
+    del data['tc']
+
     result, cid = tracker.click_event(**data)
 
     return JsonResponse({'result': result, 'cid': cid})
