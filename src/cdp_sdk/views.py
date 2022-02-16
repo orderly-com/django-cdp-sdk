@@ -68,7 +68,15 @@ def querydict_to_dict(data):
 
 @api_view(['GET', 'POST'])
 def record_view_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data)
+
+    if request.method == 'GET':
+
+        data = querydict_to_dict(request.GET)
+
+    elif request.method == 'POST':
+
+        data = querydict_to_dict(request.data)
+
     tracker = get_tracker()
     result, cid = tracker.view_event(**data)
 
@@ -77,7 +85,15 @@ def record_view_event(request, format=None, *args, **kwargs):
 
 @api_view(['GET', 'POST'])
 def record_click_event(request, format=None, *args, **kwargs):
-    data = querydict_to_dict(request.data)
+
+    if request.method == 'GET':
+
+        data = querydict_to_dict(request.GET)
+
+    elif request.method == 'POST':
+
+        data = querydict_to_dict(request.data)
+
     tracker = get_tracker()
     result, cid = tracker.click_event(**data)
 
