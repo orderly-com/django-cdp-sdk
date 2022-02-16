@@ -3,8 +3,9 @@ from typing import Optional
 from rest_framework.decorators import api_view
 from django.http.request import QueryDict
 from django.http import JsonResponse
-from cdp_sdk.tracking import Tracker
 from django.conf import settings
+
+from .tracking import Tracker
 
 
 def get_tracker():
