@@ -44,6 +44,8 @@ class Tracker:
             at='click', tg=tg,
         )
 
+        return result, cid
+
     def view_event(self, v: str = '', pt: str = '', tl: str = '',
                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                    sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
@@ -56,6 +58,8 @@ class Tracker:
             sd=sd, sr=sr, did=did, vp=vp,
             at='view', tg=tg,
         )
+
+        return result, cid
 
     def _record_event(self, v: str = '', pt: str = '', tl: str = '',
                       ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
