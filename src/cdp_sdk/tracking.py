@@ -70,6 +70,8 @@ class Tracker:
             except Exception:
                 return False, ''
 
+        print(cid)
+
         payload = {
             'tc': self.team_code,
             'did': did,
@@ -86,6 +88,8 @@ class Tracker:
             'tl': tl,
             'vp': vp
         }
+
+        print(payload)
 
         requests.get(self.relay_url + '/api/' + self.ds_id + '/tracking/', params=payload)
 
