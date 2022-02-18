@@ -1,6 +1,9 @@
 from typing import Optional
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+# https://www.django-rest-framework.org/api-guide/permissions/#allowany
+from rest_framework.permissions import AllowAny
+
 from django.http.request import QueryDict
 from django.http import JsonResponse
 from django.conf import settings
@@ -67,7 +70,7 @@ def querydict_to_dict(data):
 
 
 @api_view(['GET', 'POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes([AllowAny])
 def record_view_event(request, format=None, *args, **kwargs):
 
     if request.method == 'GET':
@@ -89,15 +92,13 @@ def record_view_event(request, format=None, *args, **kwargs):
     if tracker.team_code != data['tc']:
         return JsonResponse({'result': False, 'cid': ''})
 
-    del data['tc']
-
     result, cid = tracker.view_event(**data)
 
     return JsonResponse({'result': result, 'cid': cid})
 
 
 @api_view(['GET', 'POST'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes([AllowAny])
 def record_click_event(request, format=None, *args, **kwargs):
 
     if request.method == 'GET':
@@ -118,8 +119,6 @@ def record_click_event(request, format=None, *args, **kwargs):
 
     if tracker.team_code != data['tc']:
         return JsonResponse({'result': False, 'cid': ''})
-
-    del data['tc']
 
     result, cid = tracker.click_event(**data)
 

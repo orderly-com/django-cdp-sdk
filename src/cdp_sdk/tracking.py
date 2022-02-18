@@ -31,26 +31,11 @@ class Tracker:
         self.relay_url = relay_url
         self.cerem_url = cerem_url
 
-    def click_event(self, v: str = '', pt: str = '', tl: str = '',
-                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
-                    sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
-                    tg: str = '',
-                    ):
-
-        result, cid = self._record_event(
-            v=v, pt=pt, tl=tl,
-            ul=ul, uid=uid, cid=cid, de=de,
-            sd=sd, sr=sr, did=did, vp=vp,
-            at='click', tg=tg,
-        )
-
-        return result, cid
-
     def view_event(self, v: str = '', pt: str = '', tl: str = '',
                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                    sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
                    tg: str = '',
-                   ):
+                   *args, **kwargs):
 
         result, cid = self._record_event(
             v=v, pt=pt, tl=tl,
@@ -61,12 +46,26 @@ class Tracker:
 
         return result, cid
 
+    def click_event(self, v: str = '', pt: str = '', tl: str = '',
+                    ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
+                    sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
+                    tg: str = '',
+                    *args, **kwargs):
+
+        result, cid = self._record_event(
+            v=v, pt=pt, tl=tl,
+            ul=ul, uid=uid, cid=cid, de=de,
+            sd=sd, sr=sr, did=did, vp=vp,
+            at='click', tg=tg,
+        )
+
+        return result, cid
+
     def _record_event(self, v: str = '', pt: str = '', tl: str = '',
                       ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                       sd: str = '', sr: str = '', did: str = '', vp: str = '',
                       at: str = '', tg: Optional[str] = ''
                       ):
-
 
         if not cid:
 
@@ -75,7 +74,7 @@ class Tracker:
                 response = requests.get(self.cerem_url + '/tracking/generate-cid/', params={'team_code': self.team_code})
 
                 cid = response.json()['cid']
-            
+
             except Exception:
 
                 return False, ''
