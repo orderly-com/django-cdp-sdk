@@ -63,11 +63,12 @@ class Tracker:
                       at: str = '', tg: Optional[str] = ''
                       ):
 
+        import pdb; pdb.set_trace()
+
         if not cid:
 
             try:
 
-                import pdb; pdb.set_trace()
 
                 print('/tracking/generate-cid/')
 
