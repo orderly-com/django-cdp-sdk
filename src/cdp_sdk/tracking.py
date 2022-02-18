@@ -96,8 +96,6 @@ class Tracker:
             'vp': vp
         }
 
-        print(payload)
-
         requests.get(self.relay_url + '/api/' + self.ds_id + '/tracking/', params=payload)
 
         return True, cid
