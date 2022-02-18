@@ -90,8 +90,6 @@ def record_view_event(request, format=None, *args, **kwargs):
 
     del data['tc']
 
-    import pdb; pdb.set_trace()
-
     result, cid = tracker.view_event(**data)
 
     return JsonResponse({'result': result, 'cid': cid})

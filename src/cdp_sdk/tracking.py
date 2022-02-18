@@ -63,26 +63,18 @@ class Tracker:
                       at: str = '', tg: Optional[str] = ''
                       ):
 
-        import pdb; pdb.set_trace()
 
         if not cid:
 
             try:
 
-
-                print('/tracking/generate-cid/')
-
                 response = requests.get(self.cerem_url + '/tracking/generate-cid/', params={'team_code': self.team_code})
-
-                print(response.json())
 
                 cid = response.json()['cid']
             
             except Exception:
 
                 return False, ''
-
-        print(cid)
 
         payload = {
             'tc': self.team_code,
