@@ -67,6 +67,7 @@ def querydict_to_dict(data):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated, ))
 def record_view_event(request, format=None, *args, **kwargs):
 
     if request.method == 'GET':
@@ -96,6 +97,7 @@ def record_view_event(request, format=None, *args, **kwargs):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((IsAuthenticated, ))
 def record_click_event(request, format=None, *args, **kwargs):
 
     if request.method == 'GET':
