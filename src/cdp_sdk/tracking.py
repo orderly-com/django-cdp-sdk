@@ -63,13 +63,15 @@ class Tracker:
                       at: str = '', tg: Optional[str] = ''
                       ):
 
-        if cid is None:
+        if not cid:
+
             try:
                 response = requests.get(self.cerem_url + '/tracking/generate-cid/', params={'team_code': self.team_code})
 
                 print(response.json())
 
                 cid = response.json()['cid']
+            
             except Exception:
                 return False, ''
 
