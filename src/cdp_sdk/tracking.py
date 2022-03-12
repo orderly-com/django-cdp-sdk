@@ -41,7 +41,7 @@ class Tracker:
             v=v, pt=pt, tl=tl,
             ul=ul, uid=uid, cid=cid, de=de,
             sd=sd, sr=sr, did=did, vp=vp,
-            at='view', tg=tg,
+            at='view', tg=tg, pr='',
         )
 
         return result, cid
@@ -49,14 +49,14 @@ class Tracker:
     def click_event(self, v: str = '', pt: str = '', tl: str = '',
                     ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                     sd: str = '', sr: str = '', did: str = '', vp: str = '', t: str = '',
-                    tg: str = '',
+                    tg: str = '', pr: str = '',
                     *args, **kwargs):
 
         result, cid = self._record_event(
             v=v, pt=pt, tl=tl,
             ul=ul, uid=uid, cid=cid, de=de,
             sd=sd, sr=sr, did=did, vp=vp,
-            at='click', tg=tg,
+            at='click', tg=tg, pr=pr,
         )
 
         return result, cid
@@ -64,7 +64,7 @@ class Tracker:
     def _record_event(self, v: str = '', pt: str = '', tl: str = '',
                       ul: str = 'zh-tw', uid: Optional[str] = '', cid: Optional[str] = None, de: str = '',
                       sd: str = '', sr: str = '', did: str = '', vp: str = '',
-                      at: str = '', tg: Optional[str] = ''
+                      at: str = '', tg: Optional[str] = '', pr: Optional[str] = ''
                       ):
 
         if not cid:
@@ -93,7 +93,8 @@ class Tracker:
             'sd': sd,
             'sr': sr,
             'tl': tl,
-            'vp': vp
+            'vp': vp,
+            'pr': pr,
         }
 
         requests.get(self.relay_url + '/api/' + self.ds_id + '/tracking/', params=payload)
